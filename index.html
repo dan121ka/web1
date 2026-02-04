@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nuestra Historia ❤️</title>
+    <style>
+        /* --- ESTILOS GENERALES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&display=swap');
+
+        body {
+            margin: 0; padding: 0;
+            background: #fff5f8;
+            font-family: 'Montserrat', sans-serif;
+            color: #4a4a4a;
+            text-align: center;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent; /* Quita el brillo azul al tocar en Android */
+        }
+
+        h1 { font-family: 'Dancing Script', cursive; color: #d63384; font-size: 2.8rem; margin: 10px 0; }
+        h2 { font-family: 'Dancing Script', cursive; color: #d63384; font-size: 2rem; }
+
+        /* PANTALLA DE INICIO */
+        #welcome-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #ffdde1 0%, #ee9ca7 100%);
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            z-index: 100; transition: opacity 0.8s ease-out;
+            padding: 20px; box-sizing: border-box;
+        }
+
+        .btn-start {
+            padding: 18px 50px; font-size: 1.3rem; /* Botón más grande para dedos */
+            background: white; color: #d63384;
+            border: none; border-radius: 50px;
+            cursor: pointer; font-weight: bold;
+            box-shadow: 0 10px 25px rgba(214, 51, 132, 0.3);
+            animation: pulse 1.5s infinite;
+        }
+
+        /* CONTENIDO PRINCIPAL */
+        #main-content { display: none; padding-bottom: 80px; width: 100%; overflow-x: hidden; }
+
+        /* HERO SECTION */
+        .hero-container {
+            position: relative; margin-top: 30px; display: inline-block;
+        }
+        .hero-img {
+            width: 180px; height: 180px;
+            border-radius: 50%; object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            z-index: 2; position: relative;
+        }
+        .hero-bg {
+            position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px;
+            border-radius: 50%; background: rgba(214, 51, 132, 0.2);
+            z-index: 1; animation: spin 10s linear infinite;
+        }
+
+        /* CONTADOR */
+        .counter-box {
+            background: white; margin: 25px auto; padding: 20px;
+            width: 85%; max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transform: translateY(20px); opacity: 0; 
+            transition: all 0.8s ease;
+        }
+
+        /* --- GALERÍA ADAPTADA A MÓVIL --- */
+        .gallery {
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center;
+            gap: 15px; /* Espacio entre fotos */
+            margin: 30px auto;
+            max-width: 800px;
+            padding: 0 10px; /* Margen lateral para que no pegue al borde del cel */
+        }
+
+        .photo-card {
+            background: white; 
+            padding: 8px 8px 35px 8px; /* Simula el borde blanco polaroid */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            opacity: 0; transform: translateY(30px);
+            
+            /* TAMAÑO INTELIGENTE */
+            width: 42%; /* En celular ocupará casi la mitad de la pantalla */
+            max-width: 200px; /* En PC no se hará gigante */
+            aspect-ratio: 1 / 1.1; /* Mantiene proporción vertical */
+        }
+        
+        .photo-card img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            border-radius: 2px; 
+        }
+
+        /* CARTA */
+        .letter-container {
+            width: 85%; max-width: 500px; margin: 0 auto; padding: 25px;
+            background: #fff; border-radius: 15px;
+            border-top: 5px solid #d63384;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            text-align: left;
+            font-size: 1rem; /* Texto legible en móvil */
+        }
+
+        /* BOTÓN WHATSAPP */
+        .wa-btn {
+            display: inline-block; margin-top: 40px;
+            padding: 15px 35px; background: #25D366;
+            color: white; text-decoration: none;
+            border-radius: 50px; font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        /* MEDIA QUERIES (Ajustes finos para celulares muy pequeños) */
+        @media (max-width: 400px) {
+            h1 { font-size: 2.2rem; }
+            .hero-img { width: 150px; height: 150px; }
+            .photo-card { width: 44%; } /* Aprovechar máximo espacio en pantallas chicas */
+        }
+
+        /* ANIMACIONES Y EXTRAS */
+        .visible { opacity: 1 !important; transform: translateY(0) rotate(var(--rot)) !important; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        #typewriter-text { border-right: 2px solid #d63384; animation: blink 0.7s infinite; line-height: 1.6; }
+        @keyframes blink { 50% { border-color: transparent; } }
+        
+        .heart { position: fixed; top: -10vh; font-size: 24px; animation: fall linear forwards; z-index: -1; }
+        @keyframes fall { to { transform: translateY(110vh); } }
+
+    </style>
+</head>
+<body>
+
+    <div id="welcome-screen">
+        <h1 style="color: white; text-shadow: 0 2px 5px rgba(0,0,0,0.2);">Para una persona<br>especial...</h1>
+        <br>
+        <button class="btn-start" onclick="startExperience()">Abrir Regalo 🎁</button>
+    </div>
+
+    <div id="main-content">
+        <audio id="bg-music" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3" type="audio/mp3">
+        </audio>
+
+        <br>
+        <div class="hero-container">
+            <div class="hero-bg"></div>
+            <img src="https://via.placeholder.com/200" class="hero-img" alt="Pareja">
+        </div>
+
+        <h1>Carlos & Sofia</h1>
+
+        <div class="counter-box scroll-anim">
+            <p style="text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; color: #888;">Juntos durante</p>
+            <h2 id="days-count" style="font-size: 2.2rem; margin: 10px 0;">0 Días</h2>
+            <div style="display: flex; justify-content: center; gap: 15px; font-size: 0.85rem; color: #666;">
+                <span id="hours-count">0 Horas</span> • <span id="min-count">0 Min</span>
+            </div>
+        </div>
+
+        <div class="gallery">
+            <div class="photo-card scroll-anim" style="--rot: -2deg"><img src="https://via.placeholder.com/200x250" alt="Foto"></div>
+            <div class="photo-card scroll-anim" style="--rot: 2deg"><img src="https://via.placeholder.com/200x250" alt="Foto"></div>
+            <div class="photo-card scroll-anim" style="--rot: -1deg"><img src="https://via.placeholder.com/200x250" alt="Foto"></div>
+            <div class="photo-card scroll-anim" style="--rot: 1deg"><img src="https://via.placeholder.com/200x250" alt="Foto"></div>
+        </div>
+
+        <div class="letter-container scroll-anim">
+            <h2>Carta para ti ❤️</h2>
+            <p id="typewriter-text"></p>
+        </div>
+
+        <a href="https://wa.me/591XXXXXXXX?text=Te%20amo!" class="wa-btn">Responder ❤️</a>
+        
+        <br><br>
+        <p style="font-size: 0.7rem; color: #ccc;">Hecho con amor</p>
+    </div>
+
+    <script>
+        /* --- CONFIGURACIÓN --- */
+        const startDate = new Date('2023-01-14'); 
+        const message = "Mi amor, cada día a tu lado es un regalo. Aumenté las fotos porque quiero ver nuestros recuerdos en grande, tal como el amor que siento por ti. ¡Feliz San Valentín!";
+
+        /* --- LÓGICA --- */
+        function startExperience() {
+            document.getElementById('welcome-screen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('welcome-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                document.getElementById('bg-music').play().catch(e => console.log("Audio requiere interacción"));
+                startAnimations();
+                typeWriter();
+                createHearts();
+            }, 800);
+        }
+
+        function updateCounter() {
+            const now = new Date();
+            const diff = now - startDate;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            document.getElementById('days-count').innerText = days + " Días";
+            document.getElementById('hours-count').innerText = hours + " h";
+            document.getElementById('min-count').innerText = minutes + " m";
+        }
+        setInterval(updateCounter, 1000);
+
+        let i = 0;
+        function typeWriter() {
+            if (i < message.length) {
+                document.getElementById("typewriter-text").innerHTML += message.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            } else {
+                document.getElementById("typewriter-text").style.borderRight = "none";
+            }
+        }
+
+        function startAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.scroll-anim').forEach(el => observer.observe(el));
+        }
+
+        function createHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
