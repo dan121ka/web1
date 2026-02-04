@@ -3,139 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nuestra Historia ❤️</title>
+    <title>Para Ti | Edición Especial</title>
     <style>
-        /* --- ESTILOS GENERALES --- */
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&display=swap');
+        /* --- FUENTES DE ALTA GAMA --- */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap');
+
+        :root {
+            --primary: #b76e79; /* Rose Gold */
+            --bg-gradient: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+            --glass: rgba(255, 255, 255, 0.75);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
 
         body {
             margin: 0; padding: 0;
-            background: #fff5f8;
-            font-family: 'Montserrat', sans-serif;
-            color: #4a4a4a;
+            background: #fff0f3;
+            background-image: var(--bg-gradient);
+            background-attachment: fixed;
+            font-family: 'Lato', sans-serif;
+            color: #555;
             text-align: center;
             overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent; /* Quita el brillo azul al tocar en Android */
+            -webkit-tap-highlight-color: transparent;
         }
 
-        h1 { font-family: 'Dancing Script', cursive; color: #d63384; font-size: 2.8rem; margin: 10px 0; }
-        h2 { font-family: 'Dancing Script', cursive; color: #d63384; font-size: 2rem; }
+        h1 { font-family: 'Playfair Display', serif; font-style: italic; color: #4a4a4a; font-size: 2.5rem; margin: 15px 0; }
+        h2 { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.8rem; margin-bottom: 15px; }
 
-        /* PANTALLA DE INICIO */
+        /* PANTALLA DE CARGA */
         #welcome-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, #ffdde1 0%, #ee9ca7 100%);
-            display: flex; flex-direction: column;
+            background: #fff; display: flex; flex-direction: column;
             justify-content: center; align-items: center;
-            z-index: 100; transition: opacity 0.8s ease-out;
-            padding: 20px; box-sizing: border-box;
+            z-index: 100; transition: opacity 1s ease-out;
         }
-
         .btn-start {
-            padding: 18px 50px; font-size: 1.3rem; /* Botón más grande para dedos */
-            background: white; color: #d63384;
-            border: none; border-radius: 50px;
-            cursor: pointer; font-weight: bold;
-            box-shadow: 0 10px 25px rgba(214, 51, 132, 0.3);
-            animation: pulse 1.5s infinite;
+            padding: 12px 35px; border: 1px solid var(--primary);
+            background: transparent; color: var(--primary);
+            font-family: 'Playfair Display', serif; text-transform: uppercase;
+            letter-spacing: 2px; cursor: pointer; transition: 0.3s;
         }
+        .btn-start:hover { background: var(--primary); color: white; }
 
-        /* CONTENIDO PRINCIPAL */
-        #main-content { display: none; padding-bottom: 80px; width: 100%; overflow-x: hidden; }
+        /* CONTENEDOR PRINCIPAL */
+        #main-content { display: none; padding-bottom: 100px; max-width: 600px; margin: 0 auto; }
 
-        /* HERO SECTION */
-        .hero-container {
-            position: relative; margin-top: 30px; display: inline-block;
-        }
+        /* HERO FOTO */
         .hero-img {
-            width: 180px; height: 180px;
-            border-radius: 50%; object-fit: cover;
-            border: 5px solid white;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            z-index: 2; position: relative;
+            width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
+            border: 4px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-top: 40px;
         }
-        .hero-bg {
-            position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px;
-            border-radius: 50%; background: rgba(214, 51, 132, 0.2);
-            z-index: 1; animation: spin 10s linear infinite;
+
+        /* CRISTAL GLASSMORPHISM */
+        .glass-card {
+            background: var(--glass); backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.6);
+            border-radius: 12px; box-shadow: var(--shadow);
+            padding: 25px; margin: 25px 20px;
+        }
+
+        /* LISTA DE RAZONES (NUEVO) */
+        .reasons-list { list-style: none; padding: 0; text-align: left; }
+        .reasons-list li {
+            margin-bottom: 15px; padding-left: 20px; position: relative;
+            font-style: italic; color: #666;
+        }
+        .reasons-list li::before {
+            content: "♡"; color: var(--primary); position: absolute; left: 0; font-weight: bold;
         }
 
         /* CONTADOR */
-        .counter-box {
-            background: white; margin: 25px auto; padding: 20px;
-            width: 85%; max-width: 400px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transform: translateY(20px); opacity: 0; 
-            transition: all 0.8s ease;
+        .counter-grid { display: flex; justify-content: space-around; }
+        .time-unit h3 { font-family: 'Playfair Display', serif; color: var(--primary); margin: 0; font-size: 1.4rem; }
+        .time-unit span { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* GALERÍA */
+        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 20px; }
+        .gallery img { width: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+
+        /* BOTÓN PREGUNTA (NUEVO) */
+        .proposal-section { margin: 50px 20px; }
+        .btn-yes {
+            background: var(--primary); color: white; border: none;
+            padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;
+            font-family: 'Playfair Display', serif; cursor: pointer;
+            box-shadow: 0 5px 20px rgba(183, 110, 121, 0.4);
+            animation: pulse 1.5s infinite;
         }
 
-        /* --- GALERÍA ADAPTADA A MÓVIL --- */
-        .gallery {
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: center;
-            gap: 15px; /* Espacio entre fotos */
-            margin: 30px auto;
-            max-width: 800px;
-            padding: 0 10px; /* Margen lateral para que no pegue al borde del cel */
+        /* POPUP DE ACEPTACIÓN (NUEVO) */
+        #success-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.95);
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            z-index: 200; opacity: 0; pointer-events: none;
+            transition: opacity 0.5s;
         }
-
-        .photo-card {
-            background: white; 
-            padding: 8px 8px 35px 8px; /* Simula el borde blanco polaroid */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            opacity: 0; transform: translateY(30px);
-            
-            /* TAMAÑO INTELIGENTE */
-            width: 42%; /* En celular ocupará casi la mitad de la pantalla */
-            max-width: 200px; /* En PC no se hará gigante */
-            aspect-ratio: 1 / 1.1; /* Mantiene proporción vertical */
-        }
+        .big-heart { font-size: 5rem; animation: heartbeat 1s infinite; margin-bottom: 20px; }
         
-        .photo-card img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            border-radius: 2px; 
-        }
-
-        /* CARTA */
-        .letter-container {
-            width: 85%; max-width: 500px; margin: 0 auto; padding: 25px;
-            background: #fff; border-radius: 15px;
-            border-top: 5px solid #d63384;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
-            text-align: left;
-            font-size: 1rem; /* Texto legible en móvil */
-        }
-
-        /* BOTÓN WHATSAPP */
         .wa-btn {
-            display: inline-block; margin-top: 40px;
-            padding: 15px 35px; background: #25D366;
-            color: white; text-decoration: none;
-            border-radius: 50px; font-weight: bold;
-            font-size: 1.1rem;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+            background: #25D366; color: white; text-decoration: none;
+            padding: 12px 30px; border-radius: 30px; margin-top: 20px;
+            font-weight: bold; display: inline-block; box-shadow: 0 5px 15px rgba(37,211,102,0.3);
         }
 
-        /* MEDIA QUERIES (Ajustes finos para celulares muy pequeños) */
-        @media (max-width: 400px) {
-            h1 { font-size: 2.2rem; }
-            .hero-img { width: 150px; height: 150px; }
-            .photo-card { width: 44%; } /* Aprovechar máximo espacio en pantallas chicas */
-        }
-
-        /* ANIMACIONES Y EXTRAS */
-        .visible { opacity: 1 !important; transform: translateY(0) rotate(var(--rot)) !important; }
+        /* ANIMACIONES */
+        .fade-in { opacity: 0; transform: translateY(20px); transition: 0.8s; }
+        .visible { opacity: 1; transform: translateY(0); }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        #typewriter-text { border-right: 2px solid #d63384; animation: blink 0.7s infinite; line-height: 1.6; }
-        @keyframes blink { 50% { border-color: transparent; } }
+        @keyframes heartbeat { 0% { transform: scale(1); } 25% { transform: scale(1.1); } 40% { transform: scale(1); } 60% { transform: scale(1.1); } 100% { transform: scale(1); } }
         
-        .heart { position: fixed; top: -10vh; font-size: 24px; animation: fall linear forwards; z-index: -1; }
+        /* CORAZONES FLOTANTES */
+        .heart-float { position: fixed; top: -10vh; font-size: 20px; animation: fall linear forwards; z-index: 90; }
         @keyframes fall { to { transform: translateY(110vh); } }
 
     </style>
@@ -143,9 +123,8 @@
 <body>
 
     <div id="welcome-screen">
-        <h1 style="color: white; text-shadow: 0 2px 5px rgba(0,0,0,0.2);">Para una persona<br>especial...</h1>
-        <br>
-        <button class="btn-start" onclick="startExperience()">Abrir Regalo 🎁</button>
+        <h1 style="font-size: 1.5rem; color: #888;">Tienes una invitación...</h1>
+        <button class="btn-start" onclick="startExperience()">Abrir Sobre 💌</button>
     </div>
 
     <div id="main-content">
@@ -153,44 +132,59 @@
             <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3" type="audio/mp3">
         </audio>
 
-        <br>
-        <div class="hero-container">
-            <div class="hero-bg"></div>
-            <img src="https://via.placeholder.com/200" class="hero-img" alt="Pareja">
-        </div>
+        <img src="https://via.placeholder.com/200" class="hero-img fade-in" alt="Pareja">
+        
+        <h1 class="fade-in">Gabriel & Lucia</h1>
 
-        <h1>Carlos & Sofia</h1>
-
-        <div class="counter-box scroll-anim">
-            <p style="text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; color: #888;">Juntos durante</p>
-            <h2 id="days-count" style="font-size: 2.2rem; margin: 10px 0;">0 Días</h2>
-            <div style="display: flex; justify-content: center; gap: 15px; font-size: 0.85rem; color: #666;">
-                <span id="hours-count">0 Horas</span> • <span id="min-count">0 Min</span>
+        <div class="glass-card fade-in">
+            <p style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">Tiempo Juntos</p>
+            <div class="counter-grid">
+                <div class="time-unit"><h3 id="days">0</h3><span>Días</span></div>
+                <div class="time-unit"><h3 id="hours">0</h3><span>Horas</span></div>
+                <div class="time-unit"><h3 id="mins">0</h3><span>Min</span></div>
             </div>
         </div>
 
-        <div class="gallery">
-            <div class="photo-card scroll-anim" style="--rot: -2deg"><img src="https://via.placeholder.com/200x250" alt="Foto"></div>
-            <div class="photo-card scroll-anim" style="--rot: 2deg"><img src="https://via.placeholder.com/200x250" alt="Foto"></div>
-            <div class="photo-card scroll-anim" style="--rot: -1deg"><img src="https://via.placeholder.com/200x250" alt="Foto"></div>
-            <div class="photo-card scroll-anim" style="--rot: 1deg"><img src="https://via.placeholder.com/200x250" alt="Foto"></div>
+        <div class="gallery fade-in">
+            <img src="https://via.placeholder.com/200x250" style="margin-top:0px">
+            <img src="https://via.placeholder.com/200x250" style="margin-top:20px">
         </div>
 
-        <div class="letter-container scroll-anim">
-            <h2>Carta para ti ❤️</h2>
-            <p id="typewriter-text"></p>
+        <div class="glass-card fade-in" style="text-align: left;">
+            <h2>3 Razones para amarte</h2>
+            <ul class="reasons-list">
+                <li>Por tu forma de hacerme reír cuando tengo un mal día.</li>
+                <li>Por cómo me apoyas en mis sueños sin dudarlo.</li>
+                <li>Porque a tu lado todo se siente más fácil y bonito.</li>
+            </ul>
         </div>
 
-        <a href="https://wa.me/591XXXXXXXX?text=Te%20amo!" class="wa-btn">Responder ❤️</a>
+        <div class="glass-card fade-in">
+             <div id="typewriter-text" style="font-style: italic; line-height: 1.6;"></div>
+        </div>
+
+        <div class="proposal-section fade-in">
+            <p style="font-size: 1.1rem; margin-bottom: 20px;">Tengo una pregunta importante...</p>
+            <button class="btn-yes" onclick="showLove()">¿Quieres ser mi San Valentín?</button>
+        </div>
         
         <br><br>
-        <p style="font-size: 0.7rem; color: #ccc;">Hecho con amor</p>
+        <p style="font-size: 0.7rem; color: #bbb;">Design by You</p>
+    </div>
+
+    <div id="success-modal">
+        <div class="big-heart">💖</div>
+        <h1 style="font-size: 2rem; color: #b76e79;">¡Siii! Te Amo</h1>
+        <p style="padding: 0 20px;">Gracias por hacerme la persona más feliz.</p>
+        <a href="https://wa.me/591XXXXXXXX?text=Sí%20acepto%20ser%20tu%20San%20Valentín!%20Te%20Amo%20❤️" class="wa-btn">Confirmar por WhatsApp 💬</a>
+        <br><br>
+        <button onclick="closeModal()" style="background:none; border:none; color:#999; text-decoration:underline;">Volver a ver las fotos</button>
     </div>
 
     <script>
         /* --- CONFIGURACIÓN --- */
         const startDate = new Date('2023-01-14'); 
-        const message = "Mi amor, cada día a tu lado es un regalo. Aumenté las fotos porque quiero ver nuestros recuerdos en grande, tal como el amor que siento por ti. ¡Feliz San Valentín!";
+        const message = "Eres mi lugar seguro y mi aventura favorita. No necesito nada más que tenerte cerca. Feliz día del amor.";
 
         /* --- LÓGICA --- */
         function startExperience() {
@@ -198,57 +192,63 @@
             setTimeout(() => {
                 document.getElementById('welcome-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
-                document.getElementById('bg-music').play().catch(e => console.log("Audio requiere interacción"));
-                startAnimations();
+                document.getElementById('bg-music').play().catch(e => console.log("Click necesario"));
+                startScrollAnim();
                 typeWriter();
-                createHearts();
             }, 800);
         }
 
-        function updateCounter() {
+        function showLove() {
+            document.getElementById('success-modal').style.opacity = '1';
+            document.getElementById('success-modal').style.pointerEvents = 'auto';
+            createExplosion(); // Lluvia de corazones masiva
+        }
+
+        function closeModal() {
+            document.getElementById('success-modal').style.opacity = '0';
+            document.getElementById('success-modal').style.pointerEvents = 'none';
+        }
+
+        // Contador
+        setInterval(() => {
             const now = new Date();
             const diff = now - startDate;
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((diff / 1000 / 60) % 60);
-            document.getElementById('days-count').innerText = days + " Días";
-            document.getElementById('hours-count').innerText = hours + " h";
-            document.getElementById('min-count').innerText = minutes + " m";
-        }
-        setInterval(updateCounter, 1000);
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            document.getElementById('mins').innerText = Math.floor((diff / 1000 / 60) % 60);
+        }, 1000);
 
+        // Escritura
         let i = 0;
         function typeWriter() {
             if (i < message.length) {
                 document.getElementById("typewriter-text").innerHTML += message.charAt(i);
                 i++;
                 setTimeout(typeWriter, 50);
-            } else {
-                document.getElementById("typewriter-text").style.borderRight = "none";
             }
         }
 
-        function startAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.scroll-anim').forEach(el => observer.observe(el));
+        // Scroll Animación
+        function startScrollAnim() {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
+            });
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
         }
 
-        function createHearts() {
-            setInterval(() => {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.innerHTML = '❤️';
-                heart.style.left = Math.random() * 100 + "vw";
-                heart.style.animationDuration = Math.random() * 2 + 3 + "s";
-                document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 5000);
-            }, 300);
+        // Lluvia de corazones
+        function createExplosion() {
+            for(let j=0; j<30; j++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart-float');
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + "vw";
+                    heart.style.animationDuration = Math.random() * 2 + 2 + "s";
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 4000);
+                }, j * 100);
+            }
         }
     </script>
 </body>
